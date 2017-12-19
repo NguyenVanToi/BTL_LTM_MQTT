@@ -170,7 +170,7 @@ void sendID(int sockfd)
 	char sendID[512] ;
 	int i, strlenID;
 	memset(sendID, '\0', sizeof(sendID));
-	strcat(sendID, "Client online: \n");
+	strcat(sendID, "\nClient online: \n");
 	for(i = 0; i < MAX_CLIENT; i++)
 	{
 
@@ -259,7 +259,7 @@ static void *doit(void *arg)
 	while(( nread = read(connfd, buf, sizeof(buf))) > 0)
 	{
 		buf[nread] = '\0';
-		if(strcmp(buf, "HELPCLIENT") == 0)
+		if(strcmp(buf, "--S") == 0)
 		{
 			sendID(connfd);
 			continue;
@@ -270,7 +270,6 @@ static void *doit(void *arg)
 			IDgroup = buf[strlen(buf) - 1];
 			continue;
 		}
-	
 		if(buf[strlen(buf) - 1] == '0' && buf[strlen(buf) - 2] == '0' && buf[strlen(buf) - 3] == '1' )
 		{
 			buf[strlen(buf) - 3 ] = '\0';

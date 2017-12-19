@@ -104,7 +104,7 @@ void *sendMess(void *arg)
 	}
 	if (x[0] == '3')
 	{
-		write(sockfd, "HELPCLIENT " ,10);
+		write(sockfd, "--S" , 3);
 		
 		for(;;){
 			usleep(200);
@@ -150,7 +150,10 @@ void *sendMess(void *arg)
 				continue;
 			}
 		}
-
+		if(strcmp(buf, "--S") == 0) {
+			write(sockfd, buf, strlen(buf));
+			continue;
+		}
 		if(strcmp(buf, "@") == 0)
 		{
 			exit(1);
@@ -207,7 +210,6 @@ void *recvMess(void *arg)
 			strncpy(recvnamefile, buf2 + 4, strlen(buf2) - 4);
 			memset(buf2,0,sizeof(buf2));	
 			read(sockfd, &len_file, sizeof(int));
-			printf("aa: %d\n", len_file);
 			if(len_file >= 0) {
 				recvFile(recvnamefile, sockfd, len_file);
 			}
