@@ -154,6 +154,15 @@ void *sendMess(void *arg)
 			write(sockfd, buf, strlen(buf));
 			continue;
 		}
+		if(strcmp(buf, "--H") == 0) {
+			printf("--H\tShow menu help.\n");
+			printf("--S\tShow list user online.\n");
+			printf("--M\tShow menu feature.\n");
+			printf("--N\tShow mode now.\n");
+			printf("--G\tModify Id group.\n");
+			printf("--F\tSend file.\n");
+			continue;
+		}
 		if(strcmp(buf, "@") == 0)
 		{
 			exit(1);
